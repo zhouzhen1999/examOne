@@ -1,0 +1,23 @@
+{
+  "name": "examone",
+  "version": "1.0.0",
+  "description": "examOne",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhouzhen1999/examOne.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhouzhen1999/examOne/issues"
+  },
+  "homepage": "https://github.com/zhouzhen1999/examOne#readme",
+  "devDependencies": {
+    "gulp-sass": "^4.0.2",
+    "gulp-webserver": "^0.9.1"
+  }
+}
