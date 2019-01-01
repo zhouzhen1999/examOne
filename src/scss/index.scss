@@ -124,3 +124,12 @@ section {
         }
     }
 }
+
+footer {
+    @include num(100%,
+    100%);
+    background: #ccc;
+    button {
+        margin-left: 2rem;
+    }
+}

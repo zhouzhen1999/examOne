@@ -41,6 +41,8 @@ gulp.task('webserver', function() {
                 if (pathname == "/favicon.ico") {
                     res.end("");
                     return;
+                } else if (pathname == "/api/data") {
+                    res.end(JSON.stringify({ code: 0, datas: mock }))
                 } else if (pathname == "/api/list") {
                     let querystring = require("querystring");
                     var chunkStr = "";
@@ -49,11 +51,12 @@ gulp.task('webserver', function() {
                     })
 
                     req.on("end", function() {
-                        var params = querystring.parse(mock);
+                        var params = querystring.parse(chunkStr);
                         params.time = new Date().toLocaleString();
                         params.id = mock.length + 1;
+                        mock.unshift(params);
                         fs.writeFileSync("./src/mock/data.json", JSON.stringify(mock));
-                        res.end(JSON.stringify({ code: 0, msg: "上传成功", data: mock }))
+                        res.end(JSON.stringify({ code: 0, msg: "上传成功" }))
                     })
                 } else {
                     pathname = pathname == "/" ? "index.html" : pathname;
