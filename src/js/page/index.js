@@ -54,6 +54,7 @@ require(["./js/config.js"], function() {
                         }
                     })
                 }
+                $(".alert").hide()
             })
         }
     })

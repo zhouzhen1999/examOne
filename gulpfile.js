@@ -18,11 +18,15 @@ let path = require("path");
 
 let fs = require("fs");
 
+let babel = require("gulp-babel");
+
 let mock = require("./src/mock/data.json");
 //编译scss
 gulp.task("css", function() {
     return gulp.src("./src/scss/*.scss")
         .pipe(sass())
+        .pipe(bCss())
+        .pipe(concat("all.css"))
         .pipe(gulp.dest("./src/css"))
 })
 
@@ -65,3 +69,32 @@ gulp.task('webserver', function() {
             }
         }));
 });
+
+
+gulp.task("dev", gulp.series("css", "webserver", "watch"))
+
+
+gulp.task("bCss", function() {
+    return gulp.src("./src/css/*.css")
+        .pipe(gulp.dest("./bulid/css"))
+})
+
+
+gulp.task("bHtml", function() {
+    return gulp.src("./src/index.html")
+        .pipe(bHtml({ collapseWhitespace: true }))
+        .pipe(gulp.dest("./bulid"))
+})
+
+
+gulp.task("bJs", function() {
+    return gulp.src("./src/js/*.js", "!./src/js/libs")
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(js())
+        .pipe(gulp.dest("./bulid/js"))
+})
+
+
+gulp.task("default", gulp.series("bCss", "bHtml", "bJs"))
